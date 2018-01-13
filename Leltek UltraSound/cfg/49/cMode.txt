@@ -1,0 +1,16 @@
+#wr 160 c8 1	# reg_pulser_afeshdn_lvdsrst_cnt = 'd200+'d256
+wr 160 68 1	# reg_pulser_afeshdn_lvdsrst_cnt = 'd200+'d256
+#wr 160 58 1	# reg_pulser_afeshdn_lvdsrst_cnt = 'd200+'d256
+wr 180 1	# 13 angles for b mode
+#wr 8E FF 02	# reg_app_firing_frame = 1023
+wr 8E 80 02	# firing per frame
+wr 250 40	# reg_app_2p6ms_frame = 0x40, 6Hz
+#wr 2D 04
+#wait 300
+wr 80 00	# reg_pw_mode_en=0, reg_pw_mode_en=0
+wr 81 53	# reg_cf_resolution=1, reg_cf_cfen=1, reg_cf_mode_en=1
+wr 82 00	# reg_pw_pwmode_en=0
+wr 86 c		# reg_rx_lastangle = 12, 13 angles for b mode
+#wr 13 06
+#wr AC 15 00 00 00	# cf auto sensitivity shreshold
+wr AC 0D 00 00 00	# cf auto sensitivity shreshold

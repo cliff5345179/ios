@@ -1,0 +1,263 @@
+wr 26C 1 # reg_hw_fan_ctl=1
+wr 252 0 # reg_afe_adc_on[3:0]=0
+wr 242 FF 0
+wr 36 1 # reg_tx_pattern_simple_angle=1
+#wr 97 50
+#wr 59 01 # power control    # vpp_en
+#wait 20 # wait for 20ms
+#wr 59 03 # power control    # vnn_en
+#wait 20 # wait for 20ms
+
+#wr 59 04 # power control    # vcc5_4v75_en
+#wait 20 # wait for 20ms
+#wr 59 0c # power control    # tvcc_5v_en
+#wait 20 # wait for 20ms
+
+#wr 59 1f # power control    # vee_en
+#wait 20 # wait for 20ms
+
+#wr 59 2c # power control    # trx_3v3_en
+#wait 20 # wait for 20ms
+#wr 59 6c # power control    # hv_5v_en
+#wait 20 # wait for 20ms
+wr 59 ec # power control    # avdd_1v8_en
+wait 20 # wait for 20ms
+
+
+#wr 5A 09 # power control    # ovdd_1v8_en
+#wait 20 # wait for 20ms
+wr 5A 0b # power control    # trx_5v3_en
+wait 20 # wait for 20ms
+wr 5A 0f # power control    # afe_spi_en
+wait 20 # wait for 20ms
+#wr 5A 0f # power control    # wifi_3v3_en
+#wait 20 # wait for 20ms
+
+wr 5B 0
+wr 5B 4
+wr FD 85
+wr 5B 0
+
+#wr 58 24	# vpp/vnn ctrl 30V:'h24 20V:'h12
+
+wait 20 # wait for 20ms
+
+wr 59 ed # power control    # vpp_en
+wait 20 # wait for 20ms
+
+wr 59 ef # power control    # vnn_en
+wait 20 # wait for 20ms
+wr 59 ff # power control    # vee_en
+wait 20 # wait for 20ms
+
+
+#wr F4 0    # clock stop
+wr FC 9    # no clock stop, keep dynamic tmod0 to fix the peak current, shutdown AFE
+#wr F2 64
+
+	##################################################
+	# afe setting
+	##################################################
+wr 00 82
+wr FA 00	# no early reg_afe_shdn_dis_fire
+wr A1 FF	# afe_spi_en
+###Maxim AFE command write register RX4~RXB
+#wr 04 1A 00 00 00 00 08 08 10   #PLL 39~50M, VGA mode 1010
+#wr 04 3A 00 00 00 00 08 08 10   #PLL 25~28.8M, VGA mode 1010
+wr 04 30 00 00 00 00 08 08 10   #PLL 25~28.8M, VGA mode 1010
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 10 00 00 00 04 08 08 10   #enable clock in termination
+wr 04 AA 00 00 00 07 08 08 10   # enable high pass filter
+#wr 04 00 00 00 00 07 08 08 10   # disable high pass filter
+#wr 04 98 00 00 00 0A 08 08 10   #in 2 100om, LNA 18.5db, AAF 18M, CWD lowpw
+wr 04 94 00 00 00 0A 08 08 10   #in 2 100om, LNA 18.5db, AAF 18M, CWD lowpw
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 AE 00 00 00 10 08 08 10   #Initiates transfer of data in ADC registers 0Ah to 0Fh to AFE
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 00 00 00 00 10 08 08 10   #Complete transfer of data in ADC registers 0Ah to 0Fh to AFE
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 03 00 00 00 01 08 08 10   #2's complement,MSB first, center align
+wr 04 00 00 00 00 70 08 10 20   #enable external DAC TGC control chip
+
+	##################################################
+	# clock/power related register setting
+	##################################################
+wr F0 01    # clk_adc = 25mhz
+#wr F0 00    # clk_adc = 50mhz
+wr F4 af    # clock stop
+wr F5 29    # afe_power_ctrl
+wr F6 35    # afe_power_ctrl, 25MHz
+#wr F6 00 00    # afe_adc_power_ctrl
+#wr F8 00 00    # afe_amp_power_ctrl
+	##################################################
+	# control : prf/tgc related register setting
+	##################################################
+wr 38 01	# reg_xdc_type, should be by host, removed??
+wr 2C 09    # afe prf
+wr 2D 0a    # cf prf
+#wr 2E 04    # bmode prf
+wr 2E 06    # bmode prf
+#wr 2E 3f    # bmode prf
+wr 2F 04    # tx_start delay to more 3us for lt702/3
+wr 16 A4 0	# b mode tgc interval
+wr 18 A4 0	# c mode tgc interval
+#wr 3A 02	# b1=upsample2 for linear only
+wr 3B 01	# b1=sidecomp for bf data
+wr 3F 50
+wr 32 00
+wr 8E 3f 1	# firing per frame = 256
+#wr 8E A6 0	# firing per frame = 167 (30 fps)
+wr 95 01	# 0: adc start from lvds async delay one more T
+#wr 34 5B
+#wr 35 5B
+#wr 90 00
+
+	##################################################
+	# bmode related register setting
+	##################################################
+wr 81 10
+#wr 86 18	# reg_rx_lastangle = 24
+#wr 8A 44	# bmode blog init for lna=18db to 44 for convex
+wr 8A 22	# for max2082 adc12b
+
+	##################################################
+	# cf related register setting
+	##################################################
+wr 80 0		# B/C mode
+wr 83 1f	# reg_cf_cntdop = 32
+wr 84 1f	# reg_pw_cntdop = 32
+wr 88 84	# wall filter
+wr 8B 31	# b[5:4] = zgating, b[3:0] = cf_cntdop1(accumulate firing)
+wr 8C 17	# b2= rx hpf, b1=cf apo, b0=bmode apo, b4=slow apo(for convex)
+wr A8 00 10 00 00	# cf amp sensitivity shreshold
+wr AC 12 00 00 00	# cf auto sensitivity shreshold
+wr B0 20		# b[5] ref_cf_amp_check
+#wr D0 F0 00 00 00	# adc hpf for cf a2/a3 fc=0.02*50M=1M
+wr D0 E0 00 00 00	# adc hpf for cf a2/a3 fc=0.02*50M=1M, 1st order
+wr D8 D4 01 28 03	# adc hpf for bmode a2/a3 fc=0.02*50M=1M
+#wr D4 4C 00 D0 03	# wf a2/a3 fc=0.05
+wr D4 58 01 7c 03	# wf a2/a3 fc=0.075
+wr E0 00	# tx_pattern for pw, imgblock
+wr E2 00	# tx_pattern for pw, angle=0
+wr E4 00	# tx_pattern for cf, angle=0
+wr E3 2e	# tx_pattern for pw, 3=4cycles; e=18cycles;c=360ns
+wr E5 3e	# tx_pattern for cf, 3=4cycles; e=18cycles;c=360ns
+wr E6 55	# rx_pattern for cf, e=18cycles;c=360ns
+
+wr 33 D0
+	##################################################
+	# host related register setting
+	##################################################
+#wr 3D FF 01	# reg_bmod_len??
+wr 3D FF 00	# reg_bmod_len??
+#wr 3D FE 01	# reg_bmod_len??
+#wr 3D 1f 00	# reg_bmod_len??
+#wr 98 01 # test pattern
+wr 55 01	# reg_cf_bfnum=1(Z_depth=128)
+#wr 53 ff 1	# color z-resolution = 1024
+#wr 53 ff	# color z-resolution = 512
+wr 53 7f	# color z-resolution = 512
+wr 01 1		# tx_en output triggered by negative(1) or positive(0) edge
+
+
+#wr 92 38	# reg_cf_bfout_sline=56, bfbb output
+wr 93 0		# reg_cf_bfout_st=0
+#wr 99 08	# reg_rx_convextz1
+#wr 99 00	# adc input control
+wr 8D 1		# reg_cf_cfout7_inv=1
+	##################################################
+	# reg_tx_en, start firing
+	##################################################
+wr 99 10 #  reg_trx_imgblock7=1 for LT702 7 image blocks mode
+#wr 99 30 #  reg_rx_image256sl=1 reg_trx_imgblock7=1 for LT702 7 image blocks mode
+wr 160 c8 0	# reg_pulser_afeshdn_lvdsrst_cnt = 'd200
+wr 162 3 # for PushSource: b mode decimatin from reg_bmode_decimation_new.
+wr 164 A8 # reg_bmode_decimation_new=8, decimation 12
+wr 8B 0 # no fast and slow gating
+wr 170 7 # reg_cf_snr_weighting=1, reg_cf_lthcc_en=1 reg_cf_flash_artifact=1
+wr 171 4 # reg_cf_nc=4
+wr 172 0 # reg_cf_nc_th=0
+wr 190 a # reg_cf_autov_threshold=0xa
+wr 194 1 # reg_cf_autov_abs_chk=1
+wr 195 2 # reg_cf_flash_nmv=1
+wr 198 5 00 00 00 # reg_cf_bound_low = 5
+wr 19C 00 4 00 00 # reg_cf_bound_low = 0x400
+wr 15E 4 # reg_rx_apo_hann=1
+wr 1D 3 # reg_rx_data_mix_b=1, reg_rx_data_mix_c=1
+wr 1CD 40 59 01
+wr 1D0 C0 56 03
+wr 1D3 A0 21 01
+wr 1D6 00 01 01
+wr 1D9 80 B8 03
+wr 1DC 40 87 03
+wr 1DF 01
+wr 1ED 20 FA 01
+wr 1F0 E0 04 03
+wr 1F3 C0 19 02
+wr 1F6 C0 F1 01
+wr 1F9 C0 0D 03
+wr 1FC 00 05 02
+wr 1FF 0A
+#wr 5E data
+#wr 5D addr
+wr 5E 80
+wr 5D 6B # wr_gs(PWR_MGMT_1, 0x80);
+wr 5E 1
+wr 5D 6B # wr_gs(PWR_MGMT_1, 0x01);
+wr 5E 7
+#wr 5E 0
+wr 5D 6C # wr_gs(PWR_MGMT_2, 0x07);
+#wr 5D 6C # wr_gs(PWR_MGMT_2, 0x00);
+wr 5E E
+#wr 5E 9
+wr 5D 1D # wr_gs(ACCEL_CONFIG2, 0x0E);
+#wr 5D 1D # wr_gs(ACCEL_CONFIG2, 0x09);
+wr 5E 20
+wr 5D 37 # wr_gs(INT_PIN_CFG, 0x20);
+wr 5E 40
+wr 5D 38 # wr_gs(INT_ENABLE, 0x40);
+wr 5E C0
+wr 5D 69 # wr_gs(MOT_DETECT_CTRL, 0xC0);
+wr 5E 6
+#wr 5E 7
+#wr 5E a
+#wr 5E 10
+wr 5D 1F # wr_gs(WOM_THR, 0x06);
+#wr 5D 1F # wr_gs(WOM_THR, 0x07);
+#wr 5D 1F # wr_gs(WOM_THR, 0x0a);
+#wr 5D 1F # wr_gs(WOM_THR, 0x10);
+wr 5E 5
+#wr 5E b
+wr 5D 1E # wr_gs(LP_ACCEL_ODR, 0x05);
+#wr 5D 1E # wr_gs(LP_ACCEL_ODR, 0x0b);
+wr 5E 21
+wr 5D 6B # wr_gs(PWR_MGMT_1, 0x21);
+#wr 5D BA # read int
+#wr 60 CF
+wr 60 8F
+wr 61 FF
+#wr 61 7F
+#wr 61 3F
+#wr 62 CF
+wr 62 99
+#wr 66 19
+#wr 67 18
+#wr 1C2 2
+#wr 1C2 4
+wr 245 1
+wr 246 19 0
+wr 248 7
+wr 249 7
+wr 24A 2
+wr 24B 80
+wr FC 2e
+wr 13 06
+wr 166 7

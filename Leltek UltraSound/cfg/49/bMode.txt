@@ -1,0 +1,11 @@
+wr 160 c8 0	# reg_pulser_afeshdn_lvdsrst_cnt = 'd200
+wr 80 02	# reg_pw_mode_en=1, reg_pw_mode_en=0
+wr 81 50	# reg_cf_resolution=1, reg_cf_cfen=0, reg_cf_mode_en=0
+wr 82 00	# reg_pw_pwmode_en=0
+#wr 8E b6 02	# reg_app_firing_frame = 2B6 = 12Hz when PRF=120us
+#wr 8E 8c 02	# reg_app_firing_frame = 28c = 12Hz when PRF=160us
+wr 8E 00 02	# firing per frame
+wr 250 30	# reg_app_2p6ms_frame = 0x30, 8Hz
+#wr 2D 04
+wr 86 18	# reg_rx_lastangle = 24, 25 angles for b mode
+wr 180 0	# 25 angles for b mode

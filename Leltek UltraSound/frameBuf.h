@@ -1,0 +1,5 @@
+class FrameBuf {
+    public:
+    FrameBuf() {
+    }
+};

@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		735A0B251F77D55B00399576 /* cfg in Resources */ = {isa = PBXBuildFile; fileRef = 735A0B241F77D55B00399576 /* cfg */; };
+		735A0B271F77D69700399576 /* loc.txt in Resources */ = {isa = PBXBuildFile; fileRef = 735A0B261F77D69600399576 /* loc.txt */; };
+		73824CA81FC23A9F003B88A1 /* image in Resources */ = {isa = PBXBuildFile; fileRef = 73824CA71FC23A9E003B88A1 /* image */; };
+		73E0A68F1F737AFF00651247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0A68E1F737AFF00651247 /* AppDelegate.swift */; };
+		73E0A6911F737AFF00651247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0A6901F737AFF00651247 /* ViewController.swift */; };
+		73E0A6941F737AFF00651247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E0A6921F737AFF00651247 /* Main.storyboard */; };
+		73E0A6961F737AFF00651247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E0A6951F737AFF00651247 /* Assets.xcassets */; };
+		73E0A6991F737AFF00651247 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E0A6971F737AFF00651247 /* LaunchScreen.storyboard */; };
+		73E0A6A41F737AFF00651247 /* Leltek_UltraSoundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0A6A31F737AFF00651247 /* Leltek_UltraSoundTests.swift */; };
+		73E0A6AF1F737AFF00651247 /* Leltek_UltraSoundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0A6AE1F737AFF00651247 /* Leltek_UltraSoundUITests.swift */; };
+		73E0A6BE1F737B4300651247 /* LtusMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73E0A6BD1F737B4300651247 /* LtusMain.cpp */; };
+		73E2C7011F777D36004A4CC9 /* lelapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73E2C7001F777D35004A4CC9 /* lelapi.cpp */; };
+		D956B9022005FED80046FD64 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956B9012005FED80046FD64 /* AddDataViewController.swift */; };
+		D956B906200764510046FD64 /* Image1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956B905200764510046FD64 /* Image1ViewController.swift */; };
+		D956B9082008738F0046FD64 /* Image2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956B9072008738F0046FD64 /* Image2ViewController.swift */; };
+		D956B90A200873CE0046FD64 /* Image3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956B909200873CE0046FD64 /* Image3ViewController.swift */; };
+		D9DABF362009B7220040A7EF /* CalStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DABF352009B7220040A7EF /* CalStruct.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		73E0A6A01F737AFF00651247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73E0A6831F737AFF00651247 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73E0A68A1F737AFF00651247;
+			remoteInfo = "Leltek UltraSound";
+		};
+		73E0A6AB1F737AFF00651247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73E0A6831F737AFF00651247 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73E0A68A1F737AFF00651247;
+			remoteInfo = "Leltek UltraSound";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		735A0B241F77D55B00399576 /* cfg */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cfg; sourceTree = "<group>"; };
+		735A0B261F77D69600399576 /* loc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loc.txt; sourceTree = "<group>"; };
+		73824CA71FC23A9E003B88A1 /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
+		73E0A68B1F737AFF00651247 /* Leltek UltraSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Leltek UltraSound.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73E0A68E1F737AFF00651247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		73E0A6901F737AFF00651247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		73E0A6931F737AFF00651247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		73E0A6951F737AFF00651247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		73E0A6981F737AFF00651247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		73E0A69A1F737AFF00651247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73E0A69F1F737AFF00651247 /* Leltek UltraSoundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Leltek UltraSoundTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73E0A6A31F737AFF00651247 /* Leltek_UltraSoundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leltek_UltraSoundTests.swift; sourceTree = "<group>"; };
+		73E0A6A51F737AFF00651247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73E0A6AA1F737AFF00651247 /* Leltek UltraSoundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Leltek UltraSoundUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73E0A6AE1F737AFF00651247 /* Leltek_UltraSoundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leltek_UltraSoundUITests.swift; sourceTree = "<group>"; };
+		73E0A6B01F737AFF00651247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73E0A6BC1F737B4300651247 /* Leltek UltraSound-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Leltek UltraSound-Bridging-Header.h"; sourceTree = "<group>"; };
+		73E0A6BD1F737B4300651247 /* LtusMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; path = LtusMain.cpp; sourceTree = "<group>"; };
+		73E2C7001F777D35004A4CC9 /* lelapi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lelapi.cpp; sourceTree = "<group>"; };
+		73ED90CA1F78E6C8007B86E8 /* stdafx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		D956B9012005FED80046FD64 /* AddDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
+		D956B905200764510046FD64 /* Image1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image1ViewController.swift; sourceTree = "<group>"; };
+		D956B9072008738F0046FD64 /* Image2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image2ViewController.swift; sourceTree = "<group>"; };
+		D956B909200873CE0046FD64 /* Image3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image3ViewController.swift; sourceTree = "<group>"; };
+		D9DABF352009B7220040A7EF /* CalStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalStruct.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		73E0A6881F737AFF00651247 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73E0A69C1F737AFF00651247 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73E0A6A71F737AFF00651247 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		73E0A6821F737AFF00651247 = {
+			isa = PBXGroup;
+			children = (
+				73E0A68D1F737AFF00651247 /* Leltek UltraSound */,
+				73E0A6A21F737AFF00651247 /* Leltek UltraSoundTests */,
+				73E0A6AD1F737AFF00651247 /* Leltek UltraSoundUITests */,
+				73E0A68C1F737AFF00651247 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		73E0A68C1F737AFF00651247 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73E0A68B1F737AFF00651247 /* Leltek UltraSound.app */,
+				73E0A69F1F737AFF00651247 /* Leltek UltraSoundTests.xctest */,
+				73E0A6AA1F737AFF00651247 /* Leltek UltraSoundUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73E0A68D1F737AFF00651247 /* Leltek UltraSound */ = {
+			isa = PBXGroup;
+			children = (
+				73824CA71FC23A9E003B88A1 /* image */,
+				735A0B261F77D69600399576 /* loc.txt */,
+				735A0B241F77D55B00399576 /* cfg */,
+				73E2C7001F777D35004A4CC9 /* lelapi.cpp */,
+				73E0A68E1F737AFF00651247 /* AppDelegate.swift */,
+				73E0A6901F737AFF00651247 /* ViewController.swift */,
+				D9DABF352009B7220040A7EF /* CalStruct.swift */,
+				D956B9072008738F0046FD64 /* Image2ViewController.swift */,
+				D956B909200873CE0046FD64 /* Image3ViewController.swift */,
+				D956B905200764510046FD64 /* Image1ViewController.swift */,
+				D956B9012005FED80046FD64 /* AddDataViewController.swift */,
+				73E0A6921F737AFF00651247 /* Main.storyboard */,
+				73E0A6951F737AFF00651247 /* Assets.xcassets */,
+				73E0A6971F737AFF00651247 /* LaunchScreen.storyboard */,
+				73E0A69A1F737AFF00651247 /* Info.plist */,
+				73E0A6BD1F737B4300651247 /* LtusMain.cpp */,
+				73E0A6BC1F737B4300651247 /* Leltek UltraSound-Bridging-Header.h */,
+				73ED90CA1F78E6C8007B86E8 /* stdafx.h */,
+			);
+			path = "Leltek UltraSound";
+			sourceTree = "<group>";
+		};
+		73E0A6A21F737AFF00651247 /* Leltek UltraSoundTests */ = {
+			isa = PBXGroup;
+			children = (
+				73E0A6A31F737AFF00651247 /* Leltek_UltraSoundTests.swift */,
+				73E0A6A51F737AFF00651247 /* Info.plist */,
+			);
+			path = "Leltek UltraSoundTests";
+			sourceTree = "<group>";
+		};
+		73E0A6AD1F737AFF00651247 /* Leltek UltraSoundUITests */ = {
+			isa = PBXGroup;
+			children = (
+				73E0A6AE1F737AFF00651247 /* Leltek_UltraSoundUITests.swift */,
+				73E0A6B01F737AFF00651247 /* Info.plist */,
+			);
+			path = "Leltek UltraSoundUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		73E0A68A1F737AFF00651247 /* Leltek UltraSound */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73E0A6B31F737AFF00651247 /* Build configuration list for PBXNativeTarget "Leltek UltraSound" */;
+			buildPhases = (
+				73E0A6871F737AFF00651247 /* Sources */,
+				73E0A6881F737AFF00651247 /* Frameworks */,
+				73E0A6891F737AFF00651247 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Leltek UltraSound";
+			productName = "Leltek UltraSound";
+			productReference = 73E0A68B1F737AFF00651247 /* Leltek UltraSound.app */;
+			productType = "com.apple.product-type.application";
+		};
+		73E0A69E1F737AFF00651247 /* Leltek UltraSoundTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73E0A6B61F737AFF00651247 /* Build configuration list for PBXNativeTarget "Leltek UltraSoundTests" */;
+			buildPhases = (
+				73E0A69B1F737AFF00651247 /* Sources */,
+				73E0A69C1F737AFF00651247 /* Frameworks */,
+				73E0A69D1F737AFF00651247 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73E0A6A11F737AFF00651247 /* PBXTargetDependency */,
+			);
+			name = "Leltek UltraSoundTests";
+			productName = "Leltek UltraSoundTests";
+			productReference = 73E0A69F1F737AFF00651247 /* Leltek UltraSoundTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		73E0A6A91F737AFF00651247 /* Leltek UltraSoundUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73E0A6B91F737AFF00651247 /* Build configuration list for PBXNativeTarget "Leltek UltraSoundUITests" */;
+			buildPhases = (
+				73E0A6A61F737AFF00651247 /* Sources */,
+				73E0A6A71F737AFF00651247 /* Frameworks */,
+				73E0A6A81F737AFF00651247 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				73E0A6AC1F737AFF00651247 /* PBXTargetDependency */,
+			);
+			name = "Leltek UltraSoundUITests";
+			productName = "Leltek UltraSoundUITests";
+			productReference = 73E0A6AA1F737AFF00651247 /* Leltek UltraSoundUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		73E0A6831F737AFF00651247 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = Leltek;
+				TargetAttributes = {
+					73E0A68A1F737AFF00651247 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = M6ZZ4C5CL6;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+					73E0A69E1F737AFF00651247 = {
+						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 73E0A68A1F737AFF00651247;
+					};
+					73E0A6A91F737AFF00651247 = {
+						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 73E0A68A1F737AFF00651247;
+					};
+				};
+			};
+			buildConfigurationList = 73E0A6861F737AFF00651247 /* Build configuration list for PBXProject "Leltek UltraSound" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 73E0A6821F737AFF00651247;
+			productRefGroup = 73E0A68C1F737AFF00651247 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				73E0A68A1F737AFF00651247 /* Leltek UltraSound */,
+				73E0A69E1F737AFF00651247 /* Leltek UltraSoundTests */,
+				73E0A6A91F737AFF00651247 /* Leltek UltraSoundUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		73E0A6891F737AFF00651247 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73824CA81FC23A9F003B88A1 /* image in Resources */,
+				73E0A6991F737AFF00651247 /* LaunchScreen.storyboard in Resources */,
+				73E0A6961F737AFF00651247 /* Assets.xcassets in Resources */,
+				73E0A6941F737AFF00651247 /* Main.storyboard in Resources */,
+				735A0B251F77D55B00399576 /* cfg in Resources */,
+				735A0B271F77D69700399576 /* loc.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73E0A69D1F737AFF00651247 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73E0A6A81F737AFF00651247 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73E0A6871F737AFF00651247 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73E0A6BE1F737B4300651247 /* LtusMain.cpp in Sources */,
+				73E0A6911F737AFF00651247 /* ViewController.swift in Sources */,
+				D956B90A200873CE0046FD64 /* Image3ViewController.swift in Sources */,
+				73E2C7011F777D36004A4CC9 /* lelapi.cpp in Sources */,
+				73E0A68F1F737AFF00651247 /* AppDelegate.swift in Sources */,
+				D956B906200764510046FD64 /* Image1ViewController.swift in Sources */,
+				D956B9022005FED80046FD64 /* AddDataViewController.swift in Sources */,
+				D956B9082008738F0046FD64 /* Image2ViewController.swift in Sources */,
+				D9DABF362009B7220040A7EF /* CalStruct.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73E0A69B1F737AFF00651247 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73E0A6A41F737AFF00651247 /* Leltek_UltraSoundTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73E0A6A61F737AFF00651247 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73E0A6AF1F737AFF00651247 /* Leltek_UltraSoundUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		73E0A6A11F737AFF00651247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73E0A68A1F737AFF00651247 /* Leltek UltraSound */;
+			targetProxy = 73E0A6A01F737AFF00651247 /* PBXContainerItemProxy */;
+		};
+		73E0A6AC1F737AFF00651247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73E0A68A1F737AFF00651247 /* Leltek UltraSound */;
+			targetProxy = 73E0A6AB1F737AFF00651247 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		73E0A6921F737AFF00651247 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73E0A6931F737AFF00651247 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		73E0A6971F737AFF00651247 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73E0A6981F737AFF00651247 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		73E0A6B11F737AFF00651247 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		73E0A6B21F737AFF00651247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		73E0A6B41F737AFF00651247 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = M6ZZ4C5CL6;
+				INFOPLIST_FILE = "Leltek UltraSound/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ucfunnel.ultrasound;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Leltek UltraSound/Leltek UltraSound-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		73E0A6B51F737AFF00651247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = M6ZZ4C5CL6;
+				INFOPLIST_FILE = "Leltek UltraSound/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ucfunnel.ultrasound;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Leltek UltraSound/Leltek UltraSound-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		73E0A6B71F737AFF00651247 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Leltek UltraSoundTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "leltek.Leltek-UltraSoundTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Leltek UltraSound.app/Leltek UltraSound";
+			};
+			name = Debug;
+		};
+		73E0A6B81F737AFF00651247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Leltek UltraSoundTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "leltek.Leltek-UltraSoundTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Leltek UltraSound.app/Leltek UltraSound";
+			};
+			name = Release;
+		};
+		73E0A6BA1F737AFF00651247 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = "Leltek UltraSoundUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "leltek.Leltek-UltraSoundUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = "Leltek UltraSound";
+			};
+			name = Debug;
+		};
+		73E0A6BB1F737AFF00651247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = "Leltek UltraSoundUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "leltek.Leltek-UltraSoundUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = "Leltek UltraSound";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		73E0A6861F737AFF00651247 /* Build configuration list for PBXProject "Leltek UltraSound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73E0A6B11F737AFF00651247 /* Debug */,
+				73E0A6B21F737AFF00651247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73E0A6B31F737AFF00651247 /* Build configuration list for PBXNativeTarget "Leltek UltraSound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73E0A6B41F737AFF00651247 /* Debug */,
+				73E0A6B51F737AFF00651247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73E0A6B61F737AFF00651247 /* Build configuration list for PBXNativeTarget "Leltek UltraSoundTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73E0A6B71F737AFF00651247 /* Debug */,
+				73E0A6B81F737AFF00651247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73E0A6B91F737AFF00651247 /* Build configuration list for PBXNativeTarget "Leltek UltraSoundUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73E0A6BA1F737AFF00651247 /* Debug */,
+				73E0A6BB1F737AFF00651247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 73E0A6831F737AFF00651247 /* Project object */;
+}
