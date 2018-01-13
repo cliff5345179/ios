@@ -26,8 +26,8 @@ class ViewController: UIViewController {
     var naviTitle = "ultraSound" as String?
     var organ = "General" as String?
     var setting = "0.0" as String?
-    var patientNo: String?
-    var bedNo: String?
+    var patientNo = "none" as String?
+    var bedNo = "none" as String?
     
     var rate = 0.0 as Float?
     var calLine: UILabel?
@@ -37,7 +37,6 @@ class ViewController: UIViewController {
     */
     var image1none, image2none, image3none, image1, image2, image3 : UIButton?
     var buttonArchive : UIButton?
-    var Date : NSDate?
     var stringDate :String?
     //
     var floatL1 = 0.0 as Float?
@@ -1551,10 +1550,12 @@ class ViewController: UIViewController {
             // Cliff Archive
             archivePlist()
             compressFile()
-            
+            getDate()
             //call avc
-            let zipPath = tempZipPath() + "/"+naviTitle!+stringDate!+".zip"
-            let objectsToShare = [zipPath]
+            let filename = tempZipPath()
+            let fileURL = NSURL(fileURLWithPath: filename)
+            
+            let objectsToShare = [fileURL]
             let avc = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             present(avc, animated: true, completion: nil)
             
@@ -2170,9 +2171,9 @@ class ViewController: UIViewController {
         }
     }
     func compressFile(){
-        
+
         let filePath:String = NSHomeDirectory() + "/Documents"
-        let zipPath = tempZipPath() + "/"+naviTitle!+stringDate!+".zip"
+        let zipPath = tempZipPath()
         let success = SSZipArchive.createZipFile(atPath: zipPath,
                                                  withContentsOfDirectory: filePath,
                                                  keepParentDirectory: false,
@@ -2182,9 +2183,11 @@ class ViewController: UIViewController {
                                                  progressHandler: nil)
         if success {
             print("Success zip")
+            print (zipPath)
 
         } else {
             print("No success zip")
+            return
         }
     }
     func deleteFile(){
@@ -2199,12 +2202,17 @@ class ViewController: UIViewController {
     }
     
     func tempZipPath() -> String {
+        getDate()
         var path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        path += "/\(UUID().uuidString).zip"
+        path += "/"+naviTitle!+stringDate!+".zip"
         return path
     }
     func getDate(){
-    Date = NSDate()
-    stringDate = NSString(format: "%s", Date!) as String?
+    let date = NSDate()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyyMMddhhmm"
+    stringDate = dateFormatter.string(from: date as Date)
     }
 }
+
+
