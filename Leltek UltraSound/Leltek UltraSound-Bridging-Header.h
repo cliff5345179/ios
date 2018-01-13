@@ -1,6 +1,5 @@
 /*
 
-
     Leltek UltraSound-Bridging-Header.h
 
     (c) Leltek 2018
@@ -415,8 +414,12 @@ int Lel_UpdateDisplayBuffer (void); //API not used anymore
 
 // Cliff 0112 get line
 float LelGetFinalDis(void); //final real dis number get
-    
 
 #ifdef __cplusplus
 };  //extern C
+#else
+//Cliff SSzipArchive
+#import "ZipArchive.h"
 #endif
+
+

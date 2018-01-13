@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Photos
+
+//import SSZipArchive
 
 class ViewController: UIViewController {
 
@@ -36,6 +37,8 @@ class ViewController: UIViewController {
     */
     var image1none, image2none, image3none, image1, image2, image3 : UIButton?
     var buttonArchive : UIButton?
+    var Date : NSDate?
+    var stringDate :String?
     //
     var floatL1 = 0.0 as Float?
     var floatL2 = 0.0 as Float?
@@ -1174,12 +1177,14 @@ class ViewController: UIViewController {
         self.present(AddDataViewController(), animated: true, completion: nil)
     }
     @objc func cleanBtnTouched(){
+        
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let path = documentDirectory.appending("/example.plist")
         do{
         if fileManager.fileExists(atPath: path){
             try fileManager.removeItem(atPath: path)
+            
             }
         }catch {
              print("failed")
@@ -1209,6 +1214,7 @@ class ViewController: UIViewController {
         }catch {
             print("failed")
         }
+        readFromPlist()
         }
     // add config-------------------------------------------------------------
 
@@ -1543,10 +1549,19 @@ class ViewController: UIViewController {
         else if sender == buttonArchive
         {
             // Cliff Archive
-            archiveplist()
-            compressfile()
-            deletefile()
+            archivePlist()
+            compressFile()
+            
             //call avc
+            let zipPath = tempZipPath() + "/"+naviTitle!+stringDate!+".zip"
+            let objectsToShare = [zipPath]
+            let avc = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            present(avc, animated: true, completion: nil)
+            
+            deleteFile()
+            isimageload()
+            readFromPlist()
+            
         }
         // Cliff 0112 button control
     }
@@ -2102,6 +2117,16 @@ class ViewController: UIViewController {
             buttonArchive?.isHidden = true
         }
     }
+    func ResetCalStruct(){
+        CalStruct.showL1 = "0"
+        CalStruct.showL2 = "0"
+        CalStruct.showL3 = "0"
+        CalStruct.showVol = "0"
+        CalStruct.numL1 = 0
+        CalStruct.numL2 = 0
+        CalStruct.numL3 = 0
+        CalStruct.numVol = 0
+    }
     func GetCalStruct (){
         if (CalStruct.showL1 != nil){
             stringL1 = CalStruct.showL1
@@ -2128,7 +2153,7 @@ class ViewController: UIViewController {
             floatVol = CalStruct.numVol
         }
     }
-    func archiveplist(){
+    func archivePlist(){
         GetCalStruct()
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
@@ -2143,5 +2168,43 @@ class ViewController: UIViewController {
                 print("unable to create the file")
             }
         }
+    }
+    func compressFile(){
+        
+        let filePath:String = NSHomeDirectory() + "/Documents"
+        let zipPath = tempZipPath() + "/"+naviTitle!+stringDate!+".zip"
+        let success = SSZipArchive.createZipFile(atPath: zipPath,
+                                                 withContentsOfDirectory: filePath,
+                                                 keepParentDirectory: false,
+                                                 compressionLevel: -1,
+                                                 password : nil,
+                                                 aes: true,
+                                                 progressHandler: nil)
+        if success {
+            print("Success zip")
+
+        } else {
+            print("No success zip")
+        }
+    }
+    func deleteFile(){
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        guard let items = try? FileManager.default.contentsOfDirectory(atPath: path) else { return }
+        
+        for item in items {
+            // This can be made better by using pathComponent
+            let completePath = path.appending("/").appending(item)
+            try? FileManager.default.removeItem(atPath: completePath)
+        }
+    }
+    
+    func tempZipPath() -> String {
+        var path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        path += "/\(UUID().uuidString).zip"
+        return path
+    }
+    func getDate(){
+    Date = NSDate()
+    stringDate = NSString(format: "%s", Date!) as String?
     }
 }

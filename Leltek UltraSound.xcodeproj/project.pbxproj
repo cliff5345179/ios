@@ -24,6 +24,24 @@
 		D956B9082008738F0046FD64 /* Image2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956B9072008738F0046FD64 /* Image2ViewController.swift */; };
 		D956B90A200873CE0046FD64 /* Image3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956B909200873CE0046FD64 /* Image3ViewController.swift */; };
 		D9DABF362009B7220040A7EF /* CalStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DABF352009B7220040A7EF /* CalStruct.swift */; };
+		D9DABFEF2009EEAC0040A7EF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9DABFC62009EEAC0040A7EF /* Info.plist */; };
+		D9DABFF02009EEAC0040A7EF /* aes_ni.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFCA2009EEAC0040A7EF /* aes_ni.c */; };
+		D9DABFF12009EEAC0040A7EF /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFCC2009EEAC0040A7EF /* aescrypt.c */; };
+		D9DABFF22009EEAC0040A7EF /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFCD2009EEAC0040A7EF /* aeskey.c */; };
+		D9DABFF32009EEAC0040A7EF /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFCF2009EEAC0040A7EF /* aestab.c */; };
+		D9DABFF42009EEAC0040A7EF /* fileenc.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFD32009EEAC0040A7EF /* fileenc.c */; };
+		D9DABFF52009EEAC0040A7EF /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFD52009EEAC0040A7EF /* hmac.c */; };
+		D9DABFF62009EEAC0040A7EF /* prng.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFD72009EEAC0040A7EF /* prng.c */; };
+		D9DABFF72009EEAC0040A7EF /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFD92009EEAC0040A7EF /* pwd2key.c */; };
+		D9DABFF82009EEAC0040A7EF /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFDB2009EEAC0040A7EF /* sha1.c */; };
+		D9DABFF92009EEAC0040A7EF /* crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFDD2009EEAC0040A7EF /* crypt.c */; };
+		D9DABFFA2009EEAC0040A7EF /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFDF2009EEAC0040A7EF /* ioapi.c */; };
+		D9DABFFB2009EEAC0040A7EF /* ioapi_buf.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFE12009EEAC0040A7EF /* ioapi_buf.c */; };
+		D9DABFFC2009EEAC0040A7EF /* ioapi_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFE32009EEAC0040A7EF /* ioapi_mem.c */; };
+		D9DABFFD2009EEAC0040A7EF /* minishared.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFE52009EEAC0040A7EF /* minishared.c */; };
+		D9DABFFE2009EEAC0040A7EF /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFE72009EEAC0040A7EF /* unzip.c */; };
+		D9DABFFF2009EEAC0040A7EF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFE92009EEAC0040A7EF /* zip.c */; };
+		D9DAC0002009EEAC0040A7EF /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DABFEC2009EEAC0040A7EF /* SSZipArchive.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +87,45 @@
 		D956B9072008738F0046FD64 /* Image2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image2ViewController.swift; sourceTree = "<group>"; };
 		D956B909200873CE0046FD64 /* Image3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image3ViewController.swift; sourceTree = "<group>"; };
 		D9DABF352009B7220040A7EF /* CalStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalStruct.swift; sourceTree = "<group>"; };
+		D9DABFC62009EEAC0040A7EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9DABFC92009EEAC0040A7EF /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		D9DABFCA2009EEAC0040A7EF /* aes_ni.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes_ni.c; sourceTree = "<group>"; };
+		D9DABFCB2009EEAC0040A7EF /* aes_ni.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_ni.h; sourceTree = "<group>"; };
+		D9DABFCC2009EEAC0040A7EF /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
+		D9DABFCD2009EEAC0040A7EF /* aeskey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aeskey.c; sourceTree = "<group>"; };
+		D9DABFCE2009EEAC0040A7EF /* aesopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aesopt.h; sourceTree = "<group>"; };
+		D9DABFCF2009EEAC0040A7EF /* aestab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aestab.c; sourceTree = "<group>"; };
+		D9DABFD02009EEAC0040A7EF /* aestab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aestab.h; sourceTree = "<group>"; };
+		D9DABFD12009EEAC0040A7EF /* brg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_endian.h; sourceTree = "<group>"; };
+		D9DABFD22009EEAC0040A7EF /* brg_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_types.h; sourceTree = "<group>"; };
+		D9DABFD32009EEAC0040A7EF /* fileenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fileenc.c; sourceTree = "<group>"; };
+		D9DABFD42009EEAC0040A7EF /* fileenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileenc.h; sourceTree = "<group>"; };
+		D9DABFD52009EEAC0040A7EF /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
+		D9DABFD62009EEAC0040A7EF /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		D9DABFD72009EEAC0040A7EF /* prng.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prng.c; sourceTree = "<group>"; };
+		D9DABFD82009EEAC0040A7EF /* prng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prng.h; sourceTree = "<group>"; };
+		D9DABFD92009EEAC0040A7EF /* pwd2key.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pwd2key.c; sourceTree = "<group>"; };
+		D9DABFDA2009EEAC0040A7EF /* pwd2key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pwd2key.h; sourceTree = "<group>"; };
+		D9DABFDB2009EEAC0040A7EF /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
+		D9DABFDC2009EEAC0040A7EF /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		D9DABFDD2009EEAC0040A7EF /* crypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypt.c; sourceTree = "<group>"; };
+		D9DABFDE2009EEAC0040A7EF /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		D9DABFDF2009EEAC0040A7EF /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		D9DABFE02009EEAC0040A7EF /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		D9DABFE12009EEAC0040A7EF /* ioapi_buf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi_buf.c; sourceTree = "<group>"; };
+		D9DABFE22009EEAC0040A7EF /* ioapi_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi_buf.h; sourceTree = "<group>"; };
+		D9DABFE32009EEAC0040A7EF /* ioapi_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi_mem.c; sourceTree = "<group>"; };
+		D9DABFE42009EEAC0040A7EF /* ioapi_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi_mem.h; sourceTree = "<group>"; };
+		D9DABFE52009EEAC0040A7EF /* minishared.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minishared.c; sourceTree = "<group>"; };
+		D9DABFE62009EEAC0040A7EF /* minishared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minishared.h; sourceTree = "<group>"; };
+		D9DABFE72009EEAC0040A7EF /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		D9DABFE82009EEAC0040A7EF /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		D9DABFE92009EEAC0040A7EF /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		D9DABFEA2009EEAC0040A7EF /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		D9DABFEB2009EEAC0040A7EF /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		D9DABFEC2009EEAC0040A7EF /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		D9DABFED2009EEAC0040A7EF /* SSZipCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipCommon.h; sourceTree = "<group>"; };
+		D9DABFEE2009EEAC0040A7EF /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +176,7 @@
 		73E0A68D1F737AFF00651247 /* Leltek UltraSound */ = {
 			isa = PBXGroup;
 			children = (
+				D9DABFC52009EEAC0040A7EF /* SSZipArchive */,
 				73824CA71FC23A9E003B88A1 /* image */,
 				735A0B261F77D69600399576 /* loc.txt */,
 				735A0B241F77D55B00399576 /* cfg */,
@@ -157,6 +215,69 @@
 				73E0A6B01F737AFF00651247 /* Info.plist */,
 			);
 			path = "Leltek UltraSoundUITests";
+			sourceTree = "<group>";
+		};
+		D9DABFC52009EEAC0040A7EF /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				D9DABFC62009EEAC0040A7EF /* Info.plist */,
+				D9DABFC72009EEAC0040A7EF /* minizip */,
+				D9DABFEB2009EEAC0040A7EF /* SSZipArchive.h */,
+				D9DABFEC2009EEAC0040A7EF /* SSZipArchive.m */,
+				D9DABFED2009EEAC0040A7EF /* SSZipCommon.h */,
+				D9DABFEE2009EEAC0040A7EF /* ZipArchive.h */,
+			);
+			name = SSZipArchive;
+			path = ../SSZipArchive;
+			sourceTree = "<group>";
+		};
+		D9DABFC72009EEAC0040A7EF /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				D9DABFC82009EEAC0040A7EF /* aes */,
+				D9DABFDD2009EEAC0040A7EF /* crypt.c */,
+				D9DABFDE2009EEAC0040A7EF /* crypt.h */,
+				D9DABFDF2009EEAC0040A7EF /* ioapi.c */,
+				D9DABFE02009EEAC0040A7EF /* ioapi.h */,
+				D9DABFE12009EEAC0040A7EF /* ioapi_buf.c */,
+				D9DABFE22009EEAC0040A7EF /* ioapi_buf.h */,
+				D9DABFE32009EEAC0040A7EF /* ioapi_mem.c */,
+				D9DABFE42009EEAC0040A7EF /* ioapi_mem.h */,
+				D9DABFE52009EEAC0040A7EF /* minishared.c */,
+				D9DABFE62009EEAC0040A7EF /* minishared.h */,
+				D9DABFE72009EEAC0040A7EF /* unzip.c */,
+				D9DABFE82009EEAC0040A7EF /* unzip.h */,
+				D9DABFE92009EEAC0040A7EF /* zip.c */,
+				D9DABFEA2009EEAC0040A7EF /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		D9DABFC82009EEAC0040A7EF /* aes */ = {
+			isa = PBXGroup;
+			children = (
+				D9DABFC92009EEAC0040A7EF /* aes.h */,
+				D9DABFCA2009EEAC0040A7EF /* aes_ni.c */,
+				D9DABFCB2009EEAC0040A7EF /* aes_ni.h */,
+				D9DABFCC2009EEAC0040A7EF /* aescrypt.c */,
+				D9DABFCD2009EEAC0040A7EF /* aeskey.c */,
+				D9DABFCE2009EEAC0040A7EF /* aesopt.h */,
+				D9DABFCF2009EEAC0040A7EF /* aestab.c */,
+				D9DABFD02009EEAC0040A7EF /* aestab.h */,
+				D9DABFD12009EEAC0040A7EF /* brg_endian.h */,
+				D9DABFD22009EEAC0040A7EF /* brg_types.h */,
+				D9DABFD32009EEAC0040A7EF /* fileenc.c */,
+				D9DABFD42009EEAC0040A7EF /* fileenc.h */,
+				D9DABFD52009EEAC0040A7EF /* hmac.c */,
+				D9DABFD62009EEAC0040A7EF /* hmac.h */,
+				D9DABFD72009EEAC0040A7EF /* prng.c */,
+				D9DABFD82009EEAC0040A7EF /* prng.h */,
+				D9DABFD92009EEAC0040A7EF /* pwd2key.c */,
+				D9DABFDA2009EEAC0040A7EF /* pwd2key.h */,
+				D9DABFDB2009EEAC0040A7EF /* sha1.c */,
+				D9DABFDC2009EEAC0040A7EF /* sha1.h */,
+			);
+			path = aes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +397,7 @@
 				73E0A6941F737AFF00651247 /* Main.storyboard in Resources */,
 				735A0B251F77D55B00399576 /* cfg in Resources */,
 				735A0B271F77D69700399576 /* loc.txt in Resources */,
+				D9DABFEF2009EEAC0040A7EF /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,15 +422,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9DABFF52009EEAC0040A7EF /* hmac.c in Sources */,
+				D9DABFF02009EEAC0040A7EF /* aes_ni.c in Sources */,
+				D9DAC0002009EEAC0040A7EF /* SSZipArchive.m in Sources */,
 				73E0A6BE1F737B4300651247 /* LtusMain.cpp in Sources */,
+				D9DABFF92009EEAC0040A7EF /* crypt.c in Sources */,
+				D9DABFF72009EEAC0040A7EF /* pwd2key.c in Sources */,
+				D9DABFF32009EEAC0040A7EF /* aestab.c in Sources */,
+				D9DABFFE2009EEAC0040A7EF /* unzip.c in Sources */,
 				73E0A6911F737AFF00651247 /* ViewController.swift in Sources */,
+				D9DABFF22009EEAC0040A7EF /* aeskey.c in Sources */,
 				D956B90A200873CE0046FD64 /* Image3ViewController.swift in Sources */,
+				D9DABFFB2009EEAC0040A7EF /* ioapi_buf.c in Sources */,
+				D9DABFF12009EEAC0040A7EF /* aescrypt.c in Sources */,
 				73E2C7011F777D36004A4CC9 /* lelapi.cpp in Sources */,
 				73E0A68F1F737AFF00651247 /* AppDelegate.swift in Sources */,
 				D956B906200764510046FD64 /* Image1ViewController.swift in Sources */,
+				D9DABFFC2009EEAC0040A7EF /* ioapi_mem.c in Sources */,
+				D9DABFF82009EEAC0040A7EF /* sha1.c in Sources */,
+				D9DABFFA2009EEAC0040A7EF /* ioapi.c in Sources */,
+				D9DABFFF2009EEAC0040A7EF /* zip.c in Sources */,
 				D956B9022005FED80046FD64 /* AddDataViewController.swift in Sources */,
 				D956B9082008738F0046FD64 /* Image2ViewController.swift in Sources */,
+				D9DABFF42009EEAC0040A7EF /* fileenc.c in Sources */,
+				D9DABFF62009EEAC0040A7EF /* prng.c in Sources */,
 				D9DABF362009B7220040A7EF /* CalStruct.swift in Sources */,
+				D9DABFFD2009EEAC0040A7EF /* minishared.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
