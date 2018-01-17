@@ -20,9 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
         let workdir: String = Bundle.main.resourcePath!
         LelInitialize(workdir.cString(using: String.Encoding.utf8))
-        // Cliff 0108 hide status bar
-        application.isStatusBarHidden = true
-        
         
         return true
         

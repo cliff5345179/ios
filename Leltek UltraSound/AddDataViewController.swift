@@ -49,11 +49,23 @@ class AddDataViewController: UITableViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            //print("Landscape")
+        } else {
+            //print("Portrait")
+        }
+        prepareUI (size)
+        
+    }
     
     @objc func backtoMain() {
         self.present(ViewController(), animated: true, completion: nil)
     }
-    
 
     func prepareUI (_ size: CGSize) {
         
@@ -158,7 +170,10 @@ class AddDataViewController: UITableViewController, UITextFieldDelegate {
             self.view.addSubview(button)
             organBtn = button
         }
+        
+        
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         

@@ -22,6 +22,7 @@ class ViewController: UIViewController {
      Cliff 0108
      */
     var naviBar : UINavigationBar?
+    var naviItem : UINavigationItem?
     @objc var buttonAdd:UIBarButtonItem?
     var naviTitle = "ultraSound" as String?
     var organ = "General" as String?
@@ -116,7 +117,9 @@ class ViewController: UIViewController {
             
         }
     }
-
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -435,15 +438,17 @@ class ViewController: UIViewController {
          */
         if naviBar ==  nil
         {
-            let naviBar: UINavigationBar = UINavigationBar (frame: CGRect(x: 0, y: 0, width: size.width, height: 44))
-            self.view.addSubview(naviBar);
+            let navibar: UINavigationBar = UINavigationBar (frame: CGRect(x: 0, y: 0, width: size.width, height: 44))
+            self.view.addSubview(navibar);
             readFromPlist();
-            let naviItem = UINavigationItem(title: naviTitle!);
+
+               let naviItem = UINavigationItem(title: naviTitle!);
             let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ViewController.plusBtnTouched));
             let cleanItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(ViewController.cleanBtnTouched))
             naviItem.rightBarButtonItem = addItem;
             naviItem.leftBarButtonItem = cleanItem;
-            naviBar.setItems([naviItem], animated: false);
+            navibar.setItems([naviItem], animated: false);
+            naviBar = navibar
         }
 
         //naviBar----------------------------------------------
@@ -842,7 +847,7 @@ class ViewController: UIViewController {
                edittextAnnotate?.frame =  CGRect(x: bsumw + bline, y: upperspace + bline, width: (size.width-bsumw-bline*2-bw*3/2), height: bline )
                 //Cliff 0112
                 calLine?.frame = CGRect(x: bsumw, y: upperspace+bline/3, width: (size.width-bsumw), height: bline )
-                
+                naviBar?.frame = CGRect(x:0, y:0, width:(size.width), height:44)
 
                sliderContrast?.frame =  CGRect(x: bsumw + bline, y: upperspace + bline*4, width: (size.width-bsumw-bline*2)/3, height: bline )
                labelContrast?.frame =  CGRect(x: bsumw + bline+(size.width-bsumw-bline*2)/3, y: upperspace + bline*4,
@@ -894,7 +899,7 @@ class ViewController: UIViewController {
                /**
                  Cliff 0110 add image icon----------------------------------------
                  */
-                bx += bw + bspace; by = upperspace;
+                bx += bw + bspace; by = upperspace+20*bspace;
                 image1?.frame = CGRect(x:bx, y:by, width:bw/2, height:bh/3)
                 image1none?.frame = CGRect(x:bx, y:by, width:bw/2, height:bh/3)
                 by += bh + bspace;
@@ -919,8 +924,9 @@ class ViewController: UIViewController {
 
                statusLine?.frame =  CGRect(x: bsumw, y: upperspace, width: (size.width-bsumw), height: bline )
                edittextAnnotate?.frame =  CGRect(x: bsumw + bline, y: upperspace + bline, width: (size.width-bsumw-bline*2-bw*3/2), height: bline )
+                //Cliff
                 calLine?.frame = CGRect(x: bsumw, y: upperspace+bline/3, width: (size.width-bsumw), height: bline )
-
+                naviBar?.frame = CGRect(x:0, y:0, width:(size.width), height:44)
 
                sliderContrast?.frame =  CGRect(x: bsumw + bline, y: upperspace + bline*4, width: (size.width-bsumw-bline*2)/3, height: bline )
                labelContrast?.frame =  CGRect(x: bsumw + bline+(size.width-bsumw-bline*2)/3, y: upperspace + bline*4,
@@ -999,7 +1005,9 @@ class ViewController: UIViewController {
 
                statusLine?.frame =  CGRect(x: 0, y: upperspace, width: (size.width), height: bline )
                edittextAnnotate?.frame =  CGRect(x:  bline, y: upperspace + bline, width: (size.width-bline*2-bw*3/2), height: bline )
+                //Cliff
                 calLine?.frame = CGRect(x: 0, y: upperspace+bline/3, width: (size.width), height: bline )
+                naviBar?.frame = CGRect(x:0, y:0, width:(size.width), height:44)
                 edittextAnnotate?.frame =  CGRect(x: bsumw + bline, y: upperspace + bline, width: (size.width-bsumw-bline*2-bw*3/2), height: bline )
 
                sliderContrast?.frame =  CGRect(x: bline, y: upperspace + bline*4, width: (size.width-bline*2)/3, height: bline )
@@ -1055,7 +1063,7 @@ class ViewController: UIViewController {
                 /**
                  Cliff 0110 add image icon----------------------------------------
                  */
-                bx = bpage + bspace ; by = (size.height)-bsumh-(bspace*36);
+                bx = bpage + 24*bspace ; by = (size.height)-bsumh-(bspace*12);
                 
                 
                 bx += bw + bspace;
@@ -1087,8 +1095,9 @@ class ViewController: UIViewController {
 
                statusLine?.frame =  CGRect(x: 0, y: upperspace, width: (size.width), height: bline )
                edittextAnnotate?.frame =  CGRect(x:  bline, y: upperspace + bline, width: (size.width-bline*2-bw*3/2), height: bline )
-                
+                //Cliff
                 calLine?.frame = CGRect(x: 0, y: upperspace+bline/3, width: (size.width), height: bline )
+                naviBar?.frame = CGRect(x:0, y:0, width:(size.width), height:44)
                 edittextAnnotate?.frame =  CGRect(x: bsumw + bline, y: upperspace + bline, width: (size.width-bsumw-bline*2-bw*3/2), height: bline )
 
                sliderContrast?.frame =  CGRect(x: bline, y: upperspace + bline*4, width: (size.width-bline*2)/3, height: bline )
@@ -1177,43 +1186,22 @@ class ViewController: UIViewController {
     }
     @objc func cleanBtnTouched(){
         
-        let fileManager = FileManager.default
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path = documentDirectory.appending("/example.plist")
-        do{
-        if fileManager.fileExists(atPath: path){
-            try fileManager.removeItem(atPath: path)
-            
-            }
-        }catch {
-             print("failed")
-            }
-        let path1 = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
-        do{
-            if fileManager.fileExists(atPath: path1){
-                try fileManager.removeItem(atPath: path1)
-               
-            }
-        }catch {
-            print("failed")
-        }
-        let path2 = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
-        do{
-            if fileManager.fileExists(atPath: path2){
-                try fileManager.removeItem(atPath: path2)
-            }
-        }catch {
-            print("failed")
-        }
-        let path3 = documentDirectory.appending("/"+naviTitle!+"_"+String(3)+".png")
-        do{
-            if fileManager.fileExists(atPath: path3){
-                try fileManager.removeItem(atPath: path3)
-            }
-        }catch {
-            print("failed")
-        }
-        readFromPlist()
+        deleteFile()
+        
+        ResetCalStruct()
+        isimageload()
+        
+        naviTitle = "ultraSound"
+        
+        let naviItem = UINavigationItem(title: naviTitle!);
+        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ViewController.plusBtnTouched));
+        let cleanItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(ViewController.cleanBtnTouched))
+        naviItem.rightBarButtonItem = addItem;
+        naviItem.leftBarButtonItem = cleanItem;
+        naviBar?.setItems([naviItem], animated: false);
+        
+        setting = "0.0" as String?
+        calLine?.text = setCalLabel()
         }
     // add config-------------------------------------------------------------
 
@@ -1223,7 +1211,7 @@ class ViewController: UIViewController {
      */
     func readFromPlist(){
         
-        
+        print("read")
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let path = documentDirectory.appending("/example.plist")
@@ -1241,6 +1229,9 @@ class ViewController: UIViewController {
             }
             else{
                 naviTitle = "UltraSound"
+                setting = "0.0" as String?
+                organ = "General" as String?
+                
                 print("load failed")
             }
         }
@@ -1553,14 +1544,19 @@ class ViewController: UIViewController {
             getDate()
             //call avc
             let filename = tempZipPath()
+            print (filename)
             let fileURL = NSURL(fileURLWithPath: filename)
             
             let objectsToShare = [fileURL]
             let avc = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            present(avc, animated: true, completion: nil)
+            avc.popoverPresentationController?.sourceView = self.view
+            avc.popoverPresentationController?.sourceRect = sender.frame
+            self.present(avc, animated: true, completion: nil)
             
             deleteFile()
             isimageload()
+            ResetCalStruct()
+            calLine?.text = setCalLabel()
             readFromPlist()
             
         }
@@ -2205,6 +2201,7 @@ class ViewController: UIViewController {
         getDate()
         var path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
         path += "/"+naviTitle!+stringDate!+".zip"
+        print(path)
         return path
     }
     func getDate(){

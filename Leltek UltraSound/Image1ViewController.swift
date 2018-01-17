@@ -46,7 +46,9 @@ class Image1ViewController: UIViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     func prepareUI (_ size: CGSize) {
         
         var upperspace: CGFloat = UIApplication.shared.statusBarFrame.height
