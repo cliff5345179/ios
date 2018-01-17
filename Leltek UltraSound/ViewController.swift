@@ -1556,8 +1556,17 @@ class ViewController: UIViewController {
             deleteFile()
             isimageload()
             ResetCalStruct()
+            setting = "0.0" as String?
             calLine?.text = setCalLabel()
-            readFromPlist()
+            
+            naviTitle = "ultraSound"
+            
+            let naviItem = UINavigationItem(title: naviTitle!);
+            let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ViewController.plusBtnTouched));
+            let cleanItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(ViewController.cleanBtnTouched))
+            naviItem.rightBarButtonItem = addItem;
+            naviItem.leftBarButtonItem = cleanItem;
+            naviBar?.setItems([naviItem], animated: false);
             
         }
         // Cliff 0112 button control
