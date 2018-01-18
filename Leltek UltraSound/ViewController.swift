@@ -1212,6 +1212,14 @@ class ViewController: UIViewController {
         
         setting = "0.0" as String?
         calLine?.text = setCalLabel()
+        
+        image1?.isHidden = true
+        image2?.isHidden = true
+        image3?.isHidden = true
+        buttonArchive?.isHidden = true
+        image1none?.isHidden = true
+        image2none?.isHidden = true
+        image3none?.isHidden = true
         }
     // add config-------------------------------------------------------------
 
