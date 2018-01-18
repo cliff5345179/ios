@@ -1210,16 +1210,7 @@ class ViewController: UIViewController {
         naviItem.leftBarButtonItem = cleanItem;
         naviBar?.setItems([naviItem], animated: false);
         
-        setting = "0.0" as String?
-        calLine?.text = setCalLabel()
-        
-        image1?.isHidden = true
-        image2?.isHidden = true
-        image3?.isHidden = true
-        buttonArchive?.isHidden = true
-        image1none?.isHidden = true
-        image2none?.isHidden = true
-        image3none?.isHidden = true
+        resetData()
         }
     // add config-------------------------------------------------------------
 
@@ -1590,13 +1581,7 @@ class ViewController: UIViewController {
             naviItem.leftBarButtonItem = cleanItem;
             naviBar?.setItems([naviItem], animated: false);
             
-            image1?.isHidden = true
-            image2?.isHidden = true
-            image3?.isHidden = true
-            buttonArchive?.isHidden = true
-            image1none?.isHidden = true
-            image2none?.isHidden = true
-            image3none?.isHidden = true
+            resetData()
             
         }
         // Cliff 0112 button control
@@ -2258,6 +2243,23 @@ class ViewController: UIViewController {
     dateFormatter.dateFormat = "yyyyMMddhhmm"
     stringDate = dateFormatter.string(from: date as Date)
     CalStruct.getDate = stringDate
+    }
+    func resetData(){
+        setting = "0.0" as String?
+        calLine?.text = setCalLabel()
+        naviTitle = "ultraSound" as String?
+        organ = "General" as String?
+        setting = "0.0" as String?
+        patientNo = "none" as String?
+        bedNo = "none" as String?
+        
+        image1?.isHidden = true
+        image2?.isHidden = true
+        image3?.isHidden = true
+        buttonArchive?.isHidden = true
+        image1none?.isHidden = true
+        image2none?.isHidden = true
+        image3none?.isHidden = true
     }
 }
 
