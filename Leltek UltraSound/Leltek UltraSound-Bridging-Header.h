@@ -417,9 +417,9 @@ float LelGetFinalDis(void); //final real dis number get
 
 #ifdef __cplusplus
 };  //extern C
-#else
+//#else
 //Cliff SSzipArchive
-#import "ZipArchive.h"
+//#import "ZipArchive.h"
 #endif
 
 

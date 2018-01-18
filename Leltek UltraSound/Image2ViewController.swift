@@ -18,6 +18,7 @@ class Image2ViewController: UIViewController{
     var organ: String?
     
     var buttonBottomEdgeInVertical: CGFloat = 0
+    var stringDate : String?
     
     override func viewDidLoad() {
         
@@ -38,7 +39,7 @@ class Image2ViewController: UIViewController{
         
         //Create All UI objects
         readFromPlist()
-        
+        getCalDate()
         prepareUI ((self.view?.bounds.size)!)
         
     }
@@ -72,7 +73,7 @@ class Image2ViewController: UIViewController{
             let imageView = UIImageView()
             imageView.frame = CGRect(x: 0, y: upperspace, width: size.width, height: size.height-upperspace)
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(2)+".png")
             let image = UIImage(contentsOfFile: path)
             imageView.image = image
             imageView.isUserInteractionEnabled = true //Enable touch
@@ -92,7 +93,7 @@ class Image2ViewController: UIViewController{
         CalStruct.numL2 = 0
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
+        let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(2)+".png")
         do{
             if fileManager.fileExists(atPath: path){
                 try fileManager.removeItem(atPath: path)
@@ -103,7 +104,11 @@ class Image2ViewController: UIViewController{
         }
 
     }
-    
+    func getCalDate(){
+        if CalStruct.getDate != nil{
+            stringDate = CalStruct.getDate
+        }
+    }
     func readFromPlist(){
         var patientNo: String?
         

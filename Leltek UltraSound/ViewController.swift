@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         //Receive notification when APP resign active
         let app = UIApplication.shared
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.applicationWillResignActive(notification:)), name: NSNotification.Name.UIApplicationWillResignActive, object: app)
-
+        // Cliff get date
     }
 
     @objc
@@ -312,7 +312,18 @@ class ViewController: UIViewController {
 
             
             // custom 0112 Cliff
+            if organ!.elementsEqual("Bladder")
+            {
             isimageload()
+            }else{
+                image1?.isHidden = true
+                image2?.isHidden = true
+                image3?.isHidden = true
+                buttonArchive?.isHidden = true
+                image1none?.isHidden = true
+                image2none?.isHidden = true
+                image3none?.isHidden = true
+            }
             //don't show image btn in full screen
             
             
@@ -440,8 +451,8 @@ class ViewController: UIViewController {
         {
             let navibar: UINavigationBar = UINavigationBar (frame: CGRect(x: 0, y: 0, width: size.width, height: 44))
             self.view.addSubview(navibar);
+            getDate()
             readFromPlist();
-
                let naviItem = UINavigationItem(title: naviTitle!);
             let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ViewController.plusBtnTouched));
             let cleanItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(ViewController.cleanBtnTouched))
@@ -1189,7 +1200,6 @@ class ViewController: UIViewController {
         deleteFile()
         
         ResetCalStruct()
-        isimageload()
         
         naviTitle = "ultraSound"
         
@@ -1211,7 +1221,6 @@ class ViewController: UIViewController {
      */
     func readFromPlist(){
         
-        print("read")
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let path = documentDirectory.appending("/example.plist")
@@ -1410,15 +1419,20 @@ class ViewController: UIViewController {
 
               saveImageNextRender = false
                 
-              //let activityItem: [AnyObject] = [ultraSoundImageView!.image as AnyObject]
-              
+                if organ!.elementsEqual("Bladder"){
                 //save Cliff 0111
                 saveImageDocumentDirectory()
-              
-              // let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
-
-              //present(avc, animated: true, completion: nil)
+                }
+                else{
+                let activityItem: [AnyObject] = [ultraSoundImageView!.image as AnyObject]
                 
+                let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
+
+                    avc.popoverPresentationController?.sourceView = self.view
+                    avc.popoverPresentationController?.sourceRect = sender.frame
+                    self.present(avc, animated: true, completion: nil)
+                    
+                }
             }
          }
         else if sender == buttonFullScreen
@@ -1504,7 +1518,7 @@ class ViewController: UIViewController {
         {
             let fileManager = FileManager.default
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(1)+".png")
             if (fileManager.fileExists(atPath: path)) {
                 self.present(Image1ViewController(), animated: true, completion: nil)
             }
@@ -1516,7 +1530,7 @@ class ViewController: UIViewController {
         {
             let fileManager = FileManager.default
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(2)+".png")
             if (fileManager.fileExists(atPath: path)) {
                 self.present(Image2ViewController(), animated: true, completion: nil)
             }
@@ -1528,7 +1542,7 @@ class ViewController: UIViewController {
             {
                 let fileManager = FileManager.default
                 let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-                let path = documentDirectory.appending("/"+naviTitle!+"_"+String(3)+".png")
+                let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(3)+".png")
                 if (fileManager.fileExists(atPath: path)) {
                     self.present(Image3ViewController(), animated: true, completion: nil)
                 }
@@ -1540,9 +1554,9 @@ class ViewController: UIViewController {
         {
             // Cliff Archive
             archivePlist()
-            compressFile()
-            getDate()
+            //compressFile()
             //call avc
+            /**
             let filename = tempZipPath()
             print (filename)
             let fileURL = NSURL(fileURLWithPath: filename)
@@ -1552,9 +1566,9 @@ class ViewController: UIViewController {
             avc.popoverPresentationController?.sourceView = self.view
             avc.popoverPresentationController?.sourceRect = sender.frame
             self.present(avc, animated: true, completion: nil)
-            
+            */
             deleteFile()
-            isimageload()
+            readFromPlist()
             ResetCalStruct()
             setting = "0.0" as String?
             calLine?.text = setCalLabel()
@@ -1567,6 +1581,14 @@ class ViewController: UIViewController {
             naviItem.rightBarButtonItem = addItem;
             naviItem.leftBarButtonItem = cleanItem;
             naviBar?.setItems([naviItem], animated: false);
+            
+            image1?.isHidden = true
+            image2?.isHidden = true
+            image3?.isHidden = true
+            buttonArchive?.isHidden = true
+            image1none?.isHidden = true
+            image2none?.isHidden = true
+            image3none?.isHidden = true
             
         }
         // Cliff 0112 button control
@@ -1965,8 +1987,9 @@ class ViewController: UIViewController {
 
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        
         for index in 1...3{
-            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(index)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(index)+".png")
             if (!fileManager.fileExists(atPath: path)) {
                 let imageData = UIImagePNGRepresentation(ultraSoundImageView!.image!)
                 print(imageData!)
@@ -2024,11 +2047,12 @@ class ViewController: UIViewController {
     //save image----------------------------------------------------------------------
     //read
     func isimageload(){
+        
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path1 = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
-        let path2 = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
-        let path3 = documentDirectory.appending("/"+naviTitle!+"_"+String(3)+".png")
+        let path1 = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(1)+".png")
+        let path2 = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(2)+".png")
+        let path3 = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(3)+".png")
         if (fileManager.fileExists(atPath: path1)) {
             if fullScreen
             { image1none?.isHidden = true
@@ -2161,9 +2185,11 @@ class ViewController: UIViewController {
     }
     func archivePlist(){
         GetCalStruct()
+        
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path = documentDirectory.appending("/"+naviTitle!+".plist")
+        
+        let path = documentDirectory.appending("/"+naviTitle!+stringDate!+".plist")
         if (!fileManager.fileExists(atPath: path)) {
             let dicContent:[String: String] = ["Patient No": patientNo!, "Bed No":bedNo!,"Setting":setting!,"Organ": organ!,"L1": stringL1!, "L2": stringL2!, "L3":stringL3!, "Vol": stringVol!]
             let plistContent = NSDictionary(dictionary: dicContent)
@@ -2175,6 +2201,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    /**
     func compressFile(){
 
         let filePath:String = NSHomeDirectory() + "/Documents"
@@ -2195,17 +2222,20 @@ class ViewController: UIViewController {
             return
         }
     }
+ */
     func deleteFile(){
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        guard let items = try? FileManager.default.contentsOfDirectory(atPath: path) else { return }
-        
-        for item in items {
-            // This can be made better by using pathComponent
-            let completePath = path.appending("/").appending(item)
-            try? FileManager.default.removeItem(atPath: completePath)
+        let fileManager = FileManager.default
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let path = documentDirectory.appending("/example.plist")
+        do{
+        if fileManager.fileExists(atPath: path){
+            try fileManager.removeItem(atPath: path)
+                }
+            } catch {
+            print(error)
         }
     }
-    
+  /**
     func tempZipPath() -> String {
         getDate()
         var path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
@@ -2213,11 +2243,13 @@ class ViewController: UIViewController {
         print(path)
         return path
     }
+ */
     func getDate(){
     let date = NSDate()
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyyMMddhhmm"
     stringDate = dateFormatter.string(from: date as Date)
+    CalStruct.getDate = stringDate
     }
 }
 
