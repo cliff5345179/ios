@@ -63,6 +63,11 @@ extern "C" LELAPI_API bool lelapi_stop();
 
 extern "C" LELAPI_API float lelapi_getTemperature(); // in the unit of degree Celsius
 extern "C" LELAPI_API int lelapi_getBatteryCapacity(); // 0~100: when not charged, show battery capacity %; 200: charging
+extern "C" LELAPI_API int lelapi_getButtonStatus(); // 0: button is released; 1: button is pressed
+extern "C" LELAPI_API bool lelapi_getButtonRise(); // 0: not yet pressed or the press status is cleared; 1: button was pressed and not yet cleared
+extern "C" LELAPI_API bool lelapi_clearButtonRise(); // clear the pressed status
+extern "C" LELAPI_API bool lelapi_getButtonFall(); // 0: not yet released or the released status is cleared; 1: button was released and not yet cleared
+extern "C" LELAPI_API bool lelapi_clearButtonFall(); // clear the released status
 
 extern "C" LELAPI_API void lelapi_setGrayMapIndex(int index); // valid range of "index": 0~7
 

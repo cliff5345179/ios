@@ -140,6 +140,7 @@
        //status of device
        static int Lel_UltraSound_Initialized = 0;  //whether device is connected
        static int LelStarted = 0;                  //whether device is started or stopped
+       static int FreezeButtonPressed= 0;   //1-pressed, 0-released or device not available
 
        static int ColorMode = 0;
        static int MMode = 0;
@@ -476,6 +477,10 @@ extern "C"
              static float GetRulerRealLength (int idx1, int idx2);
                             //get the distance in mm in real world
                             // for ruler point [idx1] and [idx2]
+
+             static float GetBufferRealLength (int x1, int y1, int x2, int y2);
+                            //get length between (x1, y1) and (x2, y2)
+                            // where x, y are coordinate in BufB []
 
              static void CalculateRulerDisplayPosition (int start = -1, int end = -1);
                       //calculate RulerDisplayX/Y [start...end], -1 means all ruler points
@@ -1104,6 +1109,49 @@ extern "C"
 
                 /* Ruler
                    ------------------------ */
+
+                          //Ruler on Screen Side
+                          if (  DisplayBufferHeight > 0 &&  ZoomScale > 0 )
+                           {
+                              int  x, y, ystart, yend;
+                              float reallen;
+                              int c;
+                              int mw, mh, mw_curr, xpad;
+
+                              x = BufB_X /2 , ystart = 0;
+                              CalculateBufferPosition (&x, &ystart);
+
+                              x = BufB_X /2 , yend = BufB_Y_DISPLAY - 1;
+                              CalculateBufferPosition (&x, &yend);
+
+                              if ((reallen = GetBufferRealLength (BufB_X /2 , 0,  BufB_X /2 , BufB_Y_DISPLAY - 1)) > 0 )
+                               {
+                                   mw = (int) ( ((float)DisplayBufferWidth) / ZoomScale /  80);
+                                   mh = (int) ( ((float)DisplayBufferHeight) / ZoomScale /  200);
+                                   if (mh > 1 )
+                                     mh = 1;
+
+                                   xpad = 0;
+
+                                   for ( c = 0; c <= (int) reallen; c +=10 )
+                                    {
+                                        y = ystart + (int)(c * (yend - ystart) / reallen);
+                                       if ( y >= ZoomUp && y <= (int) (ZoomUp + DisplayBufferHeight / ZoomScale) )
+                                        {
+                                             if ( c % 100 == 0 )
+                                                mw_curr = mw *4;
+                                             else if ( c % 50== 0 )
+                                                mw_curr = mw *2;
+                                             else
+                                                mw_curr = mw;
+                                             DisplayBuffer_Rectangle (ZoomLeft + xpad, y, ZoomLeft + xpad + mw_curr, y + mh,
+                                                                  0X80, 0xC0, 0xC0);
+                                        }
+                                    }
+                               } //if reallen >0
+
+                           } //Ruler on Screen if DisplayBufferHeight > 0
+
                           //Lines
                           for ( i = RulerIndex_Line_Start; i <= RulerIndex_Line_End; i += 2 )
                             if ( RulerDisplayX [i] >= 0 && RulerDisplayX [i+1] >= 0 )
@@ -2299,8 +2347,10 @@ extern "C"
 
                                    } //else: holding ellipse
 
+                                  //will be update at end
+                                  //UltraSoundToDisplay();
 
-                                  UltraSoundToDisplay();
+
                               } //if holding some ruler point and in data range
 
                             else if ( AnnotationHolding > 0 )
@@ -2350,6 +2400,7 @@ extern "C"
                }
 
                       LimitZoomingInRange ();
+                      UltraSoundToDisplay ();
 
 
           } //else if LelTouch_Move
@@ -2524,19 +2575,23 @@ extern "C"
                return -1;
      }
 
+    static float GetBufferRealLength (int x1, int y1, int x2, int y2)
+     {
+                     float dis;
+                     if ( FanDegree > 0 )
+                       dis = distConvex (x1, y1, x2, y2);
+                     else
+                      dis = distLinear (x1, y1, x2, y2);
+                     return dis;
+     }
+
     static float GetRulerRealLength (int idx1, int idx2)
      {
                 if ( RulerPointX [idx1] >= 0 && RulerPointX [idx2] >= 0 &&
                      RulerPointY [idx1] >= 0 && RulerPointY [idx2] >= 0 )
                  {
-                     float dis;
-                     if ( FanDegree > 0 )
-                       dis = distConvex (RulerPointX [idx1], RulerPointY [idx1],
+                     return GetBufferRealLength (RulerPointX [idx1], RulerPointY [idx1],
                                          RulerPointX [idx2], RulerPointY [idx2]);
-                     else
-                      dis = distLinear (RulerPointX [idx1], RulerPointY [idx1],
-                                         RulerPointX [idx2], RulerPointY [idx2]);
-                     return dis;
                  }
 
                return -1;
@@ -2835,6 +2890,31 @@ extern "C"
     float LelGetBoardTemperature (void)  //return: temperatre of device head, -10000 means not available
       {
           return lelapi_getTemperature();
+      }
+
+   int LelFreezeButtonJustPressed (void)
+      {
+          if (!Lel_UltraSound_Initialized )
+              return 0;
+
+         int waspressed = FreezeButtonPressed;
+
+         if ( FreezeButtonPressed == 0 && lelapi_getButtonRise ())
+          {
+             FreezeButtonPressed = 1;
+             lelapi_clearButtonRise ();
+          }
+         else if ( FreezeButtonPressed == 1 && lelapi_getButtonFall ())
+          {
+             FreezeButtonPressed = 0;
+             lelapi_clearButtonFall ();
+          }
+         //FreezeButtonPressed = lelapi_getButtonStatus ();
+
+         if ( FreezeButtonPressed  != waspressed && FreezeButtonPressed )
+            return 1;
+         else
+            return 0;
       }
 
 

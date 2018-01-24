@@ -407,6 +407,13 @@ float LelGetBatteryRemaining (void);  //return: 0~100  (%), -1 means not availab
 
 float LelGetBoardTemperature (void); //return: temperatre (Celsius), -10000 means not available
 
+int LelFreezeButtonJustPressed (void);
+                                          /*  return 1 if freeze button just pressed, 0 if not.
+                                               NOTE: 1 will be returned only once;
+                                                  the following call will get 0.
+                                           */
+
+
 
 
 
@@ -417,9 +424,6 @@ float LelGetFinalDis(void); //final real dis number get
 
 #ifdef __cplusplus
 };  //extern C
-//#else
-//Cliff SSzipArchive
-//#import "ZipArchive.h"
 #endif
 
 

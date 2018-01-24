@@ -230,6 +230,13 @@ class ViewController: UIViewController {
         }
 
         cycleCount = cycleCount + 1
+
+        //check freeze button
+           if ( LelFreezeButtonJustPressed () != 0 )
+              { buttonSwitchSub () }
+
+
+
     }
 
 
@@ -430,6 +437,58 @@ class ViewController: UIViewController {
            ShowUltraSoundImage ()
          }
 
+        func buttonSwitchSub ()
+         {
+            if !device_on
+            {
+                let queue = DispatchQueue(label:"com.leltek.ultrasound_ios", qos:.background)
+
+                buttonSwitch?.isEnabled = false
+                buttonSwitch?.backgroundColor = .blue
+                statusLine?.text = "Connecting Device..."
+
+                waitingStart = 1;
+
+                queue.async {
+
+                    //DO NOT perform any UI action here: it will not work
+
+                    let result = LelStart ()
+
+                    //it is found that accessing sender here will be ignored
+
+                    if result != 0  //success
+                    {
+                        self.waitingStart = 2; //success
+                    }
+                    else //initialization fail
+                    {
+                        self.waitingStart = -1; //fail
+                    }
+
+                    //following operation will be handled in cycle ()
+                    //for you cannot access UI elements in 2nd thread
+
+
+                } //queue
+
+                return //release UI thread
+            }
+            else //if device_on
+             {
+                LelStop ()
+                device_on = false
+                buttonSwitch?.setTitle ("Continue", for: .normal)
+                buttonSwitch?.backgroundColor =  UIColor(red: 0, green: 0.5, blue: 0, alpha: 1)
+                moveTitleToBottom (buttonSwitch!)
+
+                sliderHistory?.isHidden=false
+                sliderHistory?.value =  Float (LelGetHistoryMax ())
+
+             }
+
+         }
+
 
 
     func prepareUI (_ size: CGSize)
@@ -451,7 +510,6 @@ class ViewController: UIViewController {
         {
             let navibar: UINavigationBar = UINavigationBar (frame: CGRect(x: 0, y: 0, width: size.width, height: 44))
             self.view.addSubview(navibar);
-            getDate()
             readFromPlist();
                let naviItem = UINavigationItem(title: naviTitle!);
             let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ViewController.plusBtnTouched));
@@ -494,7 +552,7 @@ class ViewController: UIViewController {
         //Status Line
         if statusLine == nil
          {
-            let label = UILabel(frame: CGRect(x: 0, y: 50, width: (self.view?.bounds.size.width)!, height: 20))
+            let label = UILabel(frame: CGRect(x: 0, y: 50, width: (self.view?.bounds.size.width)!, height: 21))
             //label.center = CGPoint(x: 160, y: 50)
             label.textAlignment = .left
             label.textColor = UIColor.white
@@ -1193,12 +1251,21 @@ class ViewController: UIViewController {
      Cliff 0108 bar item add Data--------------------------------------------
      */
     @objc func plusBtnTouched() {
+        LelStop ()
+        deleteFile()
+        ResetCalStruct()
+        naviTitle = "ultraSound"
+        let naviItem = UINavigationItem(title: naviTitle!);
+        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ViewController.plusBtnTouched));
+        let cleanItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(ViewController.cleanBtnTouched))
+        naviItem.rightBarButtonItem = addItem;
+        naviItem.leftBarButtonItem = cleanItem;
+        naviBar?.setItems([naviItem], animated: false);
         self.present(AddDataViewController(), animated: true, completion: nil)
     }
     @objc func cleanBtnTouched(){
         
         deleteFile()
-        
         ResetCalStruct()
         
         naviTitle = "ultraSound"
@@ -1209,6 +1276,8 @@ class ViewController: UIViewController {
         naviItem.rightBarButtonItem = addItem;
         naviItem.leftBarButtonItem = cleanItem;
         naviBar?.setItems([naviItem], animated: false);
+        
+        
         
         resetData()
         }
@@ -1250,54 +1319,7 @@ class ViewController: UIViewController {
      @objc func buttonAction(sender: UIButton!) {
         if sender == buttonSwitch
          {
-            if !device_on
-            {
-                let queue = DispatchQueue(label:"com.leltek.ultrasound_ios", qos:.background)
-
-                sender.isEnabled = false
-                sender.backgroundColor = .blue
-                statusLine?.text = "Connecting Device..."
-
-                waitingStart = 1;
-
-                queue.async {
-
-                    //DO NOT perform any UI action here: it will not work
-
-                    let result = LelStart ()
-
-                    //it is found that accessing sender here will be ignored
-
-                    if result != 0  //success
-                    {
-                        self.waitingStart = 2; //success
-                    }
-                    else //initialization fail
-                    {
-                        self.waitingStart = -1; //fail
-                    }
-
-                    //following operation will be handled in cycle ()
-                    //for you cannot access UI elements in 2nd thread
-
-
-                } //queue
-
-                return //release UI thread
-            }
-            else //if device_on
-             {
-                LelStop ()
-                device_on = false
-                sender.setTitle ("Continue", for: .normal)
-                sender.backgroundColor =  UIColor(red: 0, green: 0.5, blue: 0, alpha: 1)
-                moveTitleToBottom (sender)
-
-                sliderHistory?.isHidden=false
-
-                sliderHistory?.value =  Float (LelGetHistoryMax ())
-
-             }
+            buttonSwitchSub ()
          }
 
         else if sender == buttonPageLeft
@@ -1515,9 +1537,10 @@ class ViewController: UIViewController {
              */
         else if sender == image1
         {
+            
             let fileManager = FileManager.default
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(1)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
             if (fileManager.fileExists(atPath: path)) {
                 self.present(Image1ViewController(), animated: true, completion: nil)
             }
@@ -1527,9 +1550,10 @@ class ViewController: UIViewController {
         }
         else if sender == image2
         {
+           
             let fileManager = FileManager.default
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(2)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
             if (fileManager.fileExists(atPath: path)) {
                 self.present(Image2ViewController(), animated: true, completion: nil)
             }
@@ -1539,9 +1563,10 @@ class ViewController: UIViewController {
         }
             else if sender == image3
             {
+                
                 let fileManager = FileManager.default
                 let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-                let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(3)+".png")
+                let path = documentDirectory.appending("/"+naviTitle!+"_"+String(3)+".png")
                 if (fileManager.fileExists(atPath: path)) {
                     self.present(Image3ViewController(), animated: true, completion: nil)
                 }
@@ -1553,6 +1578,7 @@ class ViewController: UIViewController {
         {
             // Cliff Archive
             archivePlist()
+            renameImage()
             //compressFile()
             //call avc
             /**
@@ -1982,7 +2008,7 @@ class ViewController: UIViewController {
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         
         for index in 1...3{
-            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(index)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(index)+".png")
             if (!fileManager.fileExists(atPath: path)) {
                 let imageData = UIImagePNGRepresentation(ultraSoundImageView!.image!)
                 print(imageData!)
@@ -2027,7 +2053,9 @@ class ViewController: UIViewController {
         GetCalStruct()
         rate = (setting! as NSString).floatValue
         floatVol = floatL1! * floatL2! * floatL3! * rate!
+        CalStruct.numVol = floatVol
         stringVol = NSString (format:"%.1f", floatVol!) as String
+        CalStruct.showVol = stringVol
         print (floatVol!)
         print ("Vol: "+stringVol!)
     }
@@ -2043,9 +2071,9 @@ class ViewController: UIViewController {
         
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path1 = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(1)+".png")
-        let path2 = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(2)+".png")
-        let path3 = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(3)+".png")
+        let path1 = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
+        let path2 = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
+        let path3 = documentDirectory.appending("/"+naviTitle!+"_"+String(3)+".png")
         if (fileManager.fileExists(atPath: path1)) {
             if fullScreen
             { image1none?.isHidden = true
@@ -2178,7 +2206,7 @@ class ViewController: UIViewController {
     }
     func archivePlist(){
         GetCalStruct()
-        
+        getDate()
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         
@@ -2220,9 +2248,21 @@ class ViewController: UIViewController {
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let path = documentDirectory.appending("/example.plist")
+        let path1 = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
+        let path2 = documentDirectory.appending("/"+naviTitle!+"_"+String(2)+".png")
+        let path3 = documentDirectory.appending("/"+naviTitle!+"_"+String(3)+".png")
         do{
-        if fileManager.fileExists(atPath: path){
-            try fileManager.removeItem(atPath: path)
+            if fileManager.fileExists(atPath: path){
+                try fileManager.removeItem(atPath: path)
+                }
+            if fileManager.fileExists(atPath: path1){
+                try fileManager.removeItem(atPath: path1)
+                }
+            if fileManager.fileExists(atPath: path2){
+                try fileManager.removeItem(atPath: path2)
+                }
+            if fileManager.fileExists(atPath: path3){
+                try fileManager.removeItem(atPath: path3)
                 }
             } catch {
             print(error)
@@ -2242,7 +2282,6 @@ class ViewController: UIViewController {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyyMMddhhmm"
     stringDate = dateFormatter.string(from: date as Date)
-    CalStruct.getDate = stringDate
     }
     func resetData(){
         setting = "0.0" as String?
@@ -2260,6 +2299,24 @@ class ViewController: UIViewController {
         image1none?.isHidden = true
         image2none?.isHidden = true
         image3none?.isHidden = true
+    }
+    func renameImage(){
+        getDate()
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let documentDirectory = URL(fileURLWithPath: path)
+        let originPath1 = documentDirectory.appendingPathComponent("/"+naviTitle!+"_"+String(1)+".png")
+        let destinationPath1 = documentDirectory.appendingPathComponent("/"+naviTitle!+stringDate!+"_"+String(1)+".png")
+        let originPath2 = documentDirectory.appendingPathComponent("/"+naviTitle!+"_"+String(2)+".png")
+        let destinationPath2 = documentDirectory.appendingPathComponent("/"+naviTitle!+stringDate!+"_"+String(2)+".png")
+        let originPath3 = documentDirectory.appendingPathComponent("/"+naviTitle!+"_"+String(3)+".png")
+        let destinationPath3 = documentDirectory.appendingPathComponent("/"+naviTitle!+stringDate!+"_"+String(3)+".png")
+        do {
+            try FileManager.default.moveItem(at: originPath1, to: destinationPath1)
+            try FileManager.default.moveItem(at: originPath2, to: destinationPath2)
+            try FileManager.default.moveItem(at: originPath3, to: destinationPath3)
+        } catch {
+            print(error)
+        }
     }
 }
 

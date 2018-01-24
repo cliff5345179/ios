@@ -182,8 +182,15 @@ class AddDataViewController: UITableViewController, UITextFieldDelegate {
     @objc func saveAndBack(){
         let patientNo = patientField?.text
         let bedNo = bedField?.text
-        let setting = settingField?.text
-        let organ = organBtn?.currentTitle
+        var organ = organBtn?.currentTitle
+        if (organ?.elementsEqual("Pick Organ"))!{
+            organ = "General"
+        }
+        var setting = settingField?.text
+        if (setting?.elementsEqual(""))!{
+            setting = "1"
+        }
+        
         //write plist
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String

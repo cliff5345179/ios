@@ -14,7 +14,7 @@
 #ifdef LELTEK_WIN32
 
     //Kiki vs2013
-    #undef UNICODE    
+    #undef UNICODE
     #define WIN32_LEAN_AND_MEAN
     #include <windows.h>
     #include <winsock2.h>
@@ -48,9 +48,13 @@
      #include <sys/stat.h>
      #include <pthread.h>
 
+     //Kiki 201801
+     #include "showMsg.h" //include this before tcp.h
+
      #include "tcp.h"    //Include this first which will patch win32 api
 
      #include "lelapi.h"
+
      #include "utCtrl.h"
      #include "frameBuf.h"
      #include "graymap.h"
@@ -85,6 +89,11 @@ using namespace std;
 #define power_ctl_addr 0x58
 #define probe_id_addr 0x15
 
+#define button_addr 0x57
+#define button_status_bit 0
+#define button_rise_bit 1
+#define button_fall_bit 2
+
 WORD g_probeID = 0x1F;
 string g_dirname = "";
 
@@ -109,6 +118,9 @@ UtVideoHeader g_frameHeader[numImg];
 
 float fpgaTemperature;
 int batteryCapacity;
+int buttonStatus;
+//bool buttonRise;
+//bool buttonFall;
 const float absTemp = -273.15f;
 const float ratioTemp = 503.975f;
 
@@ -360,33 +372,33 @@ LELAPI_API int ut_calcBatteryCapacity (WORD vbat, BYTE vbus, float temp) {
 
     int newBatteryLevel;
     if (vbus == 1) {
-	newBatteryLevel = 200;
-	minBatteryLevel = 100;
-	minBatteryCount = 0;
+        newBatteryLevel = 200;
+        minBatteryLevel = 100;
+        minBatteryCount = 0;
     } else {
-	int vbat_comp = vbat + (44 - temp) * 44;
-	if (vbat_comp > 0x5AA0) newBatteryLevel = 100;
-	else if (vbat_comp > 0x5700)
-	    newBatteryLevel = 75 + (100 - 75) * (vbat_comp - 0x5700) / (0x5AA0 - 0x5700);
-	else if (vbat_comp > 0x5420)
-	    newBatteryLevel = 50 + (75 - 50) * (vbat_comp - 0x5420) / (0x5700 - 0x5420);
-	else if (vbat_comp > 0x5260)
-	    newBatteryLevel = 25 + (50 - 25) * (vbat_comp - 0x5260) / (0x5420 - 0x5260);
-	else if (vbat_comp > 0x5060)
-	    newBatteryLevel = 0 + (25 - 0) * (vbat_comp - 0x5060) / (0x5260 - 0x5060);
-	else newBatteryLevel = 0;
-	if (minBatteryLevel > newBatteryLevel) {
-	    minBatteryCount++;
-	    if (minBatteryCount > minBatteryCountLimit) {
-		minBatteryCount = 0;
-		minBatteryLevel = newBatteryLevel;
-	    } else {
-		newBatteryLevel = minBatteryLevel;
-	    }
-	} else {
-	    newBatteryLevel = minBatteryLevel;
-	    minBatteryCount = 0;
-	}
+        int vbat_comp = vbat + (44 - temp) * 44;
+        if (vbat_comp > 0x5AA0) newBatteryLevel = 100;
+        else if (vbat_comp > 0x5700)
+            newBatteryLevel = 75 + (100 - 75) * (vbat_comp - 0x5700) / (0x5AA0 - 0x5700);
+        else if (vbat_comp > 0x5420)
+            newBatteryLevel = 50 + (75 - 50) * (vbat_comp - 0x5420) / (0x5700 - 0x5420);
+        else if (vbat_comp > 0x5260)
+            newBatteryLevel = 25 + (50 - 25) * (vbat_comp - 0x5260) / (0x5420 - 0x5260);
+        else if (vbat_comp > 0x5060)
+            newBatteryLevel = 0 + (25 - 0) * (vbat_comp - 0x5060) / (0x5260 - 0x5060);
+        else newBatteryLevel = 0;
+        if (minBatteryLevel > newBatteryLevel) {
+            minBatteryCount++;
+            if (minBatteryCount > minBatteryCountLimit) {
+                minBatteryCount = 0;
+                minBatteryLevel = newBatteryLevel;
+            } else {
+                newBatteryLevel = minBatteryLevel;
+            }
+        } else {
+            newBatteryLevel = minBatteryLevel;
+            minBatteryCount = 0;
+        }
     }
     return newBatteryLevel;
 }
@@ -394,10 +406,13 @@ LELAPI_API int ut_calcBatteryCapacity (WORD vbat, BYTE vbus, float temp) {
 void updateInfo(UtVideoHeader* ptrHeader) {
     fpgaTemperature = hex2temp(ptrHeader->measured_temp);
     batteryCapacity = ut_calcBatteryCapacity (
-	    ptrHeader->init_vbat,
-	    ptrHeader->vbus,
-	    fpgaTemperature
-	);
+            ptrHeader->init_vbat,
+            ptrHeader->vbus,
+            fpgaTemperature
+        );
+    buttonStatus = (ptrHeader->button) & (1<<button_status_bit);
+    //buttonRise = ((ptrHeader->button) & (1<<button_rise_bit))!=0;
+    //buttonFall = ((ptrHeader->button) & (1<<button_fall_bit))!=0;
     newInfo = true;
 }
 
@@ -443,7 +458,7 @@ static void *MonitorProc(void* pv)
                 if(len > 16*depthBMode) len = 16*depthBMode;
                 reshape(g_bModeImg[pushIndexImg]+16*(hdrImg->tx_imgblock-8),g_raw+lenImgHeader,len);
                 if(hdrImg->last_imgblock) {
-		    g_frameHeader[pushIndexImg] = *hdrImg;
+                    g_frameHeader[pushIndexImg] = *hdrImg;
                     pushIndexImg = pushIndexImgInc;
                     pushIndexImgInc = (pushIndexImgInc+1)%numImg;
                 }
@@ -457,13 +472,13 @@ static void *MonitorProc(void* pv)
                 reshape(g_cModeImg[pushIndexImg]+16*(hdrImg->tx_imgblock-8),g_raw+lenImgHeader,len);
                 g_cModeVld[pushIndexImg] = true;
                 if(hdrImg->last_imgblock) {
-		    g_frameHeader[pushIndexImg] = *hdrImg;
+                    g_frameHeader[pushIndexImg] = *hdrImg;
                     pushIndexImg = pushIndexImgInc;
                     pushIndexImgInc = (pushIndexImgInc+1)%numImg;
                 }
             }
         } else if(hdrImg->sync==SYNC_INFO) {
-	    updateInfo(hdrImg);
+            updateInfo(hdrImg);
             showMsg("MonitorProc: info packet.\n");
         } else {
             showMsg("MonitorProc: unknown packet!\n");
@@ -535,9 +550,9 @@ LELAPI_API bool lelapi_ImgData(UINT *pBufU, UINT &CntU, BYTE *pBufB, UINT &CntB,
     CntP=0;
     if(pushIndexImg!=popIndexImg) {
         //memcpy(pBufB,g_bModeImg[popIndexImg],lenBMode);
-	for(int i=0;i<lenBMode;i++) {
-	    pBufB[i] = grayMapping(g_bModeImg[popIndexImg][i],g_grayMapIndex);
-	}
+        for(int i=0;i<lenBMode;i++) {
+            pBufB[i] = grayMapping(g_bModeImg[popIndexImg][i],g_grayMapIndex);
+        }
         if(g_cModeVld[popIndexImg]) {
             memcpy(pBufC,g_cModeImg[popIndexImg],lenCMode);
             g_cModeVld[popIndexImg]=false;
@@ -545,7 +560,7 @@ LELAPI_API bool lelapi_ImgData(UINT *pBufU, UINT &CntU, BYTE *pBufB, UINT &CntB,
         } else {
             CntC = 0;
         }
-	updateInfo(&(g_frameHeader[popIndexImg]));
+        updateInfo(&(g_frameHeader[popIndexImg]));
         popIndexImg = (popIndexImg+1)%numImg;
         CntB = 1;
     } else {
@@ -633,6 +648,30 @@ LELAPI_API float lelapi_getTemperature() {
 
 LELAPI_API int lelapi_getBatteryCapacity() {
     return batteryCapacity;
+}
+
+LELAPI_API int lelapi_getButtonStatus() {
+    return buttonStatus;
+}
+
+LELAPI_API bool lelapi_getButtonRise() {
+    bool status;
+    return (lelapi_read_byte(button_addr,&status)& (1<<button_rise_bit))!=0;
+}
+
+LELAPI_API bool lelapi_clearButtonRise() {
+    bool status = lelapi_write_byte(button_addr, 1<<button_rise_bit); // write 1 to clear
+    return status;
+}
+
+LELAPI_API bool lelapi_getButtonFall() {
+    bool status;
+    return (lelapi_read_byte(button_addr,&status)& (1<<button_fall_bit))!=0;
+}
+
+LELAPI_API bool lelapi_clearButtonFall() {
+    bool status = lelapi_write_byte(button_addr, 1<<button_fall_bit); // write 1 to clear
+    return status;
 }
 
 LELAPI_API void lelapi_setGrayMapIndex(int index) {

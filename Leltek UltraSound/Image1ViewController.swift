@@ -39,7 +39,6 @@ class Image1ViewController: UIViewController{
         
         //Create All UI objects
         readFromPlist()
-        getCalDate()
         prepareUI ((self.view?.bounds.size)!)
        
     }
@@ -73,7 +72,7 @@ class Image1ViewController: UIViewController{
             let imageView = UIImageView()
             imageView.frame = CGRect(x: 0, y: upperspace, width: size.width, height: size.height-upperspace)
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-            let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(1)+".png")
+            let path = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
             let image = UIImage(contentsOfFile: path)
             imageView.image = image
             imageView.isUserInteractionEnabled = true //Enable touch
@@ -91,9 +90,11 @@ class Image1ViewController: UIViewController{
     @objc func deleteImage(_ sender: Any?) {
         CalStruct.showL1 = "0"
         CalStruct.numL1 = 0
+        CalStruct.showVol = "0"
+        CalStruct.numVol = 0
         let fileManager = FileManager.default
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path = documentDirectory.appending("/"+naviTitle!+stringDate!+"_"+String(1)+".png")
+        let path = documentDirectory.appending("/"+naviTitle!+"_"+String(1)+".png")
         do{
             if fileManager.fileExists(atPath: path){
                 try fileManager.removeItem(atPath: path)
@@ -101,11 +102,6 @@ class Image1ViewController: UIViewController{
             }
         }catch {
             print("failed")
-        }
-    }
-    func getCalDate(){
-        if CalStruct.getDate != nil{
-            stringDate = CalStruct.getDate
         }
     }
     func readFromPlist(){

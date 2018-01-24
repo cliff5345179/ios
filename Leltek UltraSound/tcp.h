@@ -89,7 +89,8 @@
               nanosleep (&kperiod, NULL);
     }
 
-   inline void showMsg (const char *prefix, ...) { }
+//Kiki 201801
+//inline void showMsg (const char *prefix, ...) { }
 
 
 
